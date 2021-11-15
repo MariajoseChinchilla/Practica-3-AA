@@ -1,0 +1,14 @@
+class Solution:
+    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        M, N = len(grid), len(grid[0])
+        def dfs(r,c):
+            if 0<=r<M and 0<=c<N and grid[r][c]==1:
+                grid[r][c] = 0
+                return 1 + dfs(r+1,c) + dfs(r-1,c) + dfs(r,c-1) + dfs(r,c+1)
+            else:
+                return 0
+        output = 0
+        for i in range(M):
+            for j in range(N):
+                output = max(output, dfs(i,j))
+        return output
